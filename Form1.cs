@@ -28,5 +28,11 @@ namespace QLNVApp
                 this.Enabled = true;
             }
         }
+
+        private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLNV frm = new frmQLNV();
+            frm.ShowDialog();
+        }
     }
 }

@@ -8,15 +8,19 @@ namespace QLNVApp
 {
     class NV
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Address { get; set; }
+        public string MaNV { get; set; }
+        public string Ho { get; set; }
+        public string Ten { get; set; }
+        public string ChucVu { get; set; }
+        public string CaLamViec { get; set; }
 
-        public NV(string id, string name, string address)
+        public NV(string maNV, string ho, string ten, string chucvu, string calamviec)
         {
-            this.Id = id;
-            this.Name = name;
-            this.Address = address;
+            this.MaNV = maNV;
+            this.Ho = ho;
+            this.Ten = ten;
+            this.ChucVu = chucvu;
+            this.CaLamViec = calamviec;
         }
     }
 }

@@ -20,10 +20,10 @@ namespace QLNVApp
 
         List<NV> GetNV()
         {
-            string cnStr = "Server = .; Database = CoffeeShop; Integrated security = true;";
+            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
             SqlConnection cn = new SqlConnection(cnStr);
 
-            string sql = "SELECT * FROM NV";
+            string sql = "SELECT * FROM Nhân Viên";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
@@ -33,26 +33,28 @@ namespace QLNVApp
             SqlDataReader dr = cmd.ExecuteReader();
 
             List<NV> list = new List<NV>();
-            string id, name, address;
+            string maNV, ho, ten, chucvu, calamviec;
             while (dr.Read())
             {
-                id = dr[0].ToString();
-                name = dr[1].ToString();
-                address = dr[2].ToString();
+                maNV = dr[0].ToString();
+                ho = dr[1].ToString();
+                ten = dr[2].ToString();
+                chucvu = dr[3].ToString();
+                calamviec = dr[4].ToString();
 
-                NV sup = new NV(id, name, address);
+                NV sup = new NV(maNV, ho, ten, chucvu, calamviec);
                 list.Add(sup);
             }
             dr.Close();
             cn.Close();
             return list;
         }
-        public int CheckNV(string Id)
+        public int CheckNV(string MaNV)
         {
-            string cnStr = "Server = .; Database = CoffeeShop; Integrated security = true;";
+            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
             SqlConnection cn = new SqlConnection(cnStr);
 
-            string sql = "SELECT * FROM NV";
+            string sql = "SELECT * FROM Nhân Viên";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
@@ -61,11 +63,11 @@ namespace QLNVApp
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
 
-            string id;
+            string maNV;
             while (dr.Read())
             {
-                id = dr[0].ToString();
-                if (Id == id)
+                maNV = dr[0].ToString();
+                if (MaNV == maNV)
                     return 0;
             }
             dr.Close();
@@ -78,28 +80,32 @@ namespace QLNVApp
             List<NV> list = GetNV();
             dgvNV.DataSource = list;
 
-            txtId.DataBindings.Add("Text", list, "id");
-            txtName.DataBindings.Add("Text", list, "name");
-            txtAddress.DataBindings.Add("Text", list, "address");
+            txtMaNV.DataBindings.Add("Text", list, "maNV");
+            txtHo.DataBindings.Add("Text", list, "ho");
+            txtTen.DataBindings.Add("Text", list, "ten");
+            txtChucVu.DataBindings.Add("Text", list, "chucvu");
+            txtCaLamViec.DataBindings.Add("Text", list, "calamviec");
         }
 
         private void btAdd_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = CoffeeShop; Integrated security = true;";
+            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
             SqlConnection cn = new SqlConnection(cnStr);
 
-            string id, name, address;
-            id = txtId.Text;
-            name = txtName.Text;
-            address = txtAddress.Text;
+            string maNV, ho, ten, chucvu, calamviec;
+            maNV = txtMaNV.Text;
+            ho = txtHo.Text;
+            ten = txtTen.Text;
+            chucvu = txtChucVu.Text;
+            calamviec = txtCaLamViec.Text;
 
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(maNV))
                 return;
-            if (CheckNV(id) == 0)
+            if (CheckNV(maNV) == 0)
                 MessageBox.Show("Them that bai", "Them Nha cung cap");
             else
             {
-                string sql = "INSERT INTO NV VALUES('" + id + "', N'" + name + "', N'" + address + "')";
+                string sql = "INSERT INTO Nhân Viên VALUES('" + maNV + "', N'" + ho + "', N'" + ten + "', N'" + chucvu + "', N'" + calamviec + "')";
                 SqlCommand cmd = new SqlCommand(sql, cn);
 
                 cn.Open();
@@ -116,17 +122,19 @@ namespace QLNVApp
 
         private void btFix_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = CoffeeShop; Integrated security = true;";
+            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
             SqlConnection cn = new SqlConnection(cnStr);
 
-            string id, name, address;
-            id = txtId.Text;
-            name = txtName.Text;
-            address = txtAddress.Text;
+            string maNV, ho, ten, chucvu, calamviec;
+            maNV = txtMaNV.Text;
+            ho = txtHo.Text;
+            ten = txtTen.Text;
+            chucvu = txtChucVu.Text;
+            calamviec = txtCaLamViec.Text;
 
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(maNV))
                 return;
-            string sql = "UPDATE NV set Name = N'" + name + "',Address = N'" + address + "' WHERE Id = '" + id + "'";
+            string sql = "UPDATE Nhân Viên set Họ và tên đệm = N'" + ho + "',Tên = N'" + ten + "',Chức vụ = N'" + chucvu + "',Ca làm việc = N'" + calamviec + "' WHERE MaNV = '" + maNV + "'";
             SqlCommand cmd = new SqlCommand(sql, cn);
 
             cn.Open();
@@ -140,13 +148,13 @@ namespace QLNVApp
 
         private void btDel_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = CoffeeShop; Integrated security = true;";
+            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
             SqlConnection cn = new SqlConnection(cnStr);
 
-            string id;
-            id = txtId.Text;
+            string maNV;
+            maNV = txtMaNV.Text;
 
-            string sql = "DELETE FROM NV WHERE Id = '" + id + "'";
+            string sql = "DELETE FROM Nhân Viên WHERE MaNV = '" + maNV + "'";
             SqlCommand cmd = new SqlCommand(sql, cn);
             cn.Open();
             int numberOfRows = cmd.ExecuteNonQuery();
@@ -156,5 +164,6 @@ namespace QLNVApp
                 dgvNV.DataSource = GetNV();
             cn.Close();
         }
+
     }
 }
