@@ -45,11 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoanhThu.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQLDoanhThu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQLDoanhThu.Designer.cs">
+      <DependentUpon>frmQLDoanhThu.cs</DependentUpon>
     </Compile>
     <Compile Include="frmQLKho.cs">
       <SubType>Form</SubType>
@@ -62,6 +69,12 @@
     </Compile>
     <Compile Include="frmQLNV.Designer.cs">
       <DependentUpon>frmQLNV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThanhToan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThanhToan.Designer.cs">
+      <DependentUpon>frmThanhToan.cs</DependentUpon>
     </Compile>
     <Compile Include="Kho.cs" />
     <Compile Include="Login.cs">
@@ -82,11 +95,17 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmQLDoanhThu.resx">
+      <DependentUpon>frmQLDoanhThu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQLKho.resx">
       <DependentUpon>frmQLKho.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQLNV.resx">
       <DependentUpon>frmQLNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThanhToan.resx">
+      <DependentUpon>frmThanhToan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

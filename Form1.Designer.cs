@@ -81,7 +81,8 @@
             // 
             this.nguyênLiệuToolStripMenuItem.Name = "nguyênLiệuToolStripMenuItem";
             this.nguyênLiệuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nguyênLiệuToolStripMenuItem.Text = "Nguyên liệu";
+            this.nguyênLiệuToolStripMenuItem.Text = "Kho";
+            this.nguyênLiệuToolStripMenuItem.Click += new System.EventHandler(this.nguyênLiệuToolStripMenuItem_Click);
             // 
             // frmCoffeeShop
             // 

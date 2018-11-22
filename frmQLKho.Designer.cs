@@ -309,10 +309,6 @@
         }
 
         #endregion
-
-        #region Windows Form Designer generated code
-
-        #endregion
         private System.Windows.Forms.DataGridView dgvNV;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbPriceS;
