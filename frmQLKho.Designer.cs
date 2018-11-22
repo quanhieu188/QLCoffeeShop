@@ -30,6 +30,8 @@
         {
             this.dgvNV = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbSoLuong = new System.Windows.Forms.Label();
+            this.txtSoLuong = new System.Windows.Forms.TextBox();
             this.lbPriceM = new System.Windows.Forms.Label();
             this.lbPriceL = new System.Windows.Forms.Label();
             this.txtPriceL = new System.Windows.Forms.TextBox();
@@ -45,13 +47,11 @@
             this.btFix = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtSoLuong = new System.Windows.Forms.TextBox();
-            this.lbSoLuong = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -65,7 +65,7 @@
             this.dgvNV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.Name,
+            this.Ten,
             this.PriceS,
             this.PriceM,
             this.PriceL,
@@ -98,6 +98,24 @@
             this.groupBox1.Size = new System.Drawing.Size(397, 97);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // lbSoLuong
+            // 
+            this.lbSoLuong.AutoSize = true;
+            this.lbSoLuong.Location = new System.Drawing.Point(194, 65);
+            this.lbSoLuong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbSoLuong.Name = "lbSoLuong";
+            this.lbSoLuong.Size = new System.Drawing.Size(49, 13);
+            this.lbSoLuong.TabIndex = 11;
+            this.lbSoLuong.Text = "Số lượng";
+            // 
+            // txtSoLuong
+            // 
+            this.txtSoLuong.Location = new System.Drawing.Point(265, 63);
+            this.txtSoLuong.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSoLuong.Name = "txtSoLuong";
+            this.txtSoLuong.Size = new System.Drawing.Size(128, 20);
+            this.txtSoLuong.TabIndex = 10;
             // 
             // lbPriceM
             // 
@@ -238,11 +256,11 @@
             this.ID.Name = "ID";
             this.ID.Width = 43;
             // 
-            // Name
+            // Ten
             // 
-            this.Name.HeaderText = "Name";
-            this.Name.Name = "Name";
-            this.Name.Width = 60;
+            this.Ten.HeaderText = "Name";
+            this.Ten.Name = "Ten";
+            this.Ten.Width = 60;
             // 
             // PriceS
             // 
@@ -267,24 +285,6 @@
             this.SoLuong.HeaderText = "Số lượng";
             this.SoLuong.Name = "SoLuong";
             this.SoLuong.Width = 74;
-            // 
-            // txtSoLuong
-            // 
-            this.txtSoLuong.Location = new System.Drawing.Point(265, 63);
-            this.txtSoLuong.Margin = new System.Windows.Forms.Padding(2);
-            this.txtSoLuong.Name = "txtSoLuong";
-            this.txtSoLuong.Size = new System.Drawing.Size(128, 20);
-            this.txtSoLuong.TabIndex = 10;
-            // 
-            // lbSoLuong
-            // 
-            this.lbSoLuong.AutoSize = true;
-            this.lbSoLuong.Location = new System.Drawing.Point(194, 65);
-            this.lbSoLuong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbSoLuong.Name = "lbSoLuong";
-            this.lbSoLuong.Size = new System.Drawing.Size(49, 13);
-            this.lbSoLuong.TabIndex = 11;
-            this.lbSoLuong.Text = "Số lượng";
             // 
             // frmQLKho
             // 
@@ -325,13 +325,13 @@
         private System.Windows.Forms.TextBox txtPriceL;
         private System.Windows.Forms.TextBox txtPriceM;
         private System.Windows.Forms.Label lbPriceM;
+        private System.Windows.Forms.TextBox txtSoLuong;
+        private System.Windows.Forms.Label lbSoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceS;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceM;
         private System.Windows.Forms.DataGridViewTextBoxColumn PriceL;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
-        private System.Windows.Forms.TextBox txtSoLuong;
-        private System.Windows.Forms.Label lbSoLuong;
     }
 }
