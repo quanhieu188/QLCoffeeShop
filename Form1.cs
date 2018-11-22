@@ -57,17 +57,5 @@ namespace QLNVApp
         {
             Application.Exit();
         }
-
-        private void doanhThuToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            frmQLDoanhThu frm = new frmQLDoanhThu();
-            frm.ShowDialog();
-        }
-
-        private void nguyênLiệuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmQLKho frm = new frmQLKho();
-            frm.ShowDialog();
-        }
     }
 }

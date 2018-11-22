@@ -89,12 +89,14 @@
             this.btCancel.TabIndex = 5;
             this.btCancel.Text = "Cancel";
             this.btCancel.UseVisualStyleBackColor = true;
+            this.btCancel.Click += new System.EventHandler(this.btCancel_Click);
             // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(234, 133);
+            this.ControlBox = false;
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btLogin);
             this.Controls.Add(this.txtPassWord);
