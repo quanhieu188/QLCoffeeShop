@@ -45,32 +45,7 @@ namespace QLNVApp
             cn.Close();
             return list;
         }
-        public int CheckNV(string KhachHang)
-        {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
-            SqlConnection cn = new SqlConnection(cnStr);
-
-            string sql = "SELECT * FROM Doanh thu";
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = cn;
-            cmd.CommandText = sql;
-            cmd.CommandType = CommandType.Text;
-
-            cn.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            string khachHang;
-            while (dr.Read())
-            {
-                khachHang = dr[0].ToString();
-                if (KhachHang == khachHang)
-                    return 0;
-            }
-            dr.Close();
-            cn.Close();
-            return 1;
-        }
-
+        
         private void frmNV_Load(object sender, EventArgs e)
         {
             List<DoanhThu> list = GetDoanhThu();
