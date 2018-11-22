@@ -29,15 +29,21 @@ namespace QLNVApp
             }
         }
 
-        private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NVToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmQLNV frm = new frmQLNV();
             frm.ShowDialog();
         }
 
-        private void nguyênLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void khoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmQLKho frm = new frmQLKho();
+            frm.ShowDialog();
+        }
+
+        private void doanhThuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLDoanhThu frm = new frmQLDoanhThu();
             frm.ShowDialog();
         }
     }
