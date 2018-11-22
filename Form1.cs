@@ -50,5 +50,11 @@ namespace QLNVApp
         {
             Application.Exit();
         }
+
+        private void thanhToánToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThanhToan frm = new ThanhToan();
+            frm.ShowDialog();
+        }
     }
 }
