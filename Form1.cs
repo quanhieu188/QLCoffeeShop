@@ -46,5 +46,11 @@ namespace QLNVApp
             frmQLDoanhThu frm = new frmQLDoanhThu();
             frm.ShowDialog();
         }
+
+        private void nhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLNV frm = new frmQLNV();
+            frm.ShowDialog();
+        }
     }
 }
