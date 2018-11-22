@@ -28,13 +28,6 @@ namespace QLNVApp
                 this.Enabled = true;
             }
         }
-
-        private void NVToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmQLNV frm = new frmQLNV();
-            frm.ShowDialog();
-        }
-
         private void khoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmQLKho frm = new frmQLKho();
