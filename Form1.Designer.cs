@@ -83,8 +83,9 @@
             // nguyênLiệuToolStripMenuItem
             // 
             this.nguyênLiệuToolStripMenuItem.Name = "nguyênLiệuToolStripMenuItem";
-            this.nguyênLiệuToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.nguyênLiệuToolStripMenuItem.Text = "Nguyên liệu";
+            this.nguyênLiệuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nguyênLiệuToolStripMenuItem.Text = "Kho";
+            this.nguyênLiệuToolStripMenuItem.Click += new System.EventHandler(this.nguyênLiệuToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 

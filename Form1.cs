@@ -34,7 +34,10 @@ namespace QLNVApp
             frmQLNV frm = new frmQLNV();
             frm.ShowDialog();
         }
-
+        private void nguyênLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLKho frm = new frmQLKho();
+            frm.ShowDialog();
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
