@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvNV = new System.Windows.Forms.DataGridView();
+            this.dgvKho = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbSoLuong = new System.Windows.Forms.Label();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
@@ -46,36 +52,73 @@
             this.btDel = new System.Windows.Forms.Button();
             this.btFix = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKho)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dgvNV
+            // dgvKho
             // 
-            this.dgvNV.AllowUserToOrderColumns = true;
-            this.dgvNV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvNV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvNV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvKho.AllowUserToOrderColumns = true;
+            this.dgvKho.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvKho.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvKho.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvKho.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Ten,
             this.PriceS,
             this.PriceM,
             this.PriceL,
             this.SoLuong});
-            this.dgvNV.Location = new System.Drawing.Point(11, 127);
-            this.dgvNV.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvNV.Name = "dgvNV";
-            this.dgvNV.RowTemplate.Height = 24;
-            this.dgvNV.Size = new System.Drawing.Size(660, 304);
-            this.dgvNV.TabIndex = 1;
+            this.dgvKho.Location = new System.Drawing.Point(11, 127);
+            this.dgvKho.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvKho.Name = "dgvKho";
+            this.dgvKho.RowTemplate.Height = 24;
+            this.dgvKho.Size = new System.Drawing.Size(660, 304);
+            this.dgvKho.TabIndex = 1;
+            this.dgvKho.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvKho_CellEnter);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Width = 43;
+            // 
+            // Ten
+            // 
+            this.Ten.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ten.DataPropertyName = "Name";
+            this.Ten.HeaderText = "Name";
+            this.Ten.Name = "Ten";
+            // 
+            // PriceS
+            // 
+            this.PriceS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PriceS.DataPropertyName = "PriceS";
+            this.PriceS.HeaderText = "Price(S)";
+            this.PriceS.Name = "PriceS";
+            // 
+            // PriceM
+            // 
+            this.PriceM.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PriceM.DataPropertyName = "PriceM";
+            this.PriceM.HeaderText = "Price(M)";
+            this.PriceM.Name = "PriceM";
+            // 
+            // PriceL
+            // 
+            this.PriceL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PriceL.DataPropertyName = "PriceL";
+            this.PriceL.HeaderText = "Price(L)";
+            this.PriceL.Name = "PriceL";
+            // 
+            // SoLuong
+            // 
+            this.SoLuong.DataPropertyName = "SoLuong";
+            this.SoLuong.HeaderText = "Số lượng";
+            this.SoLuong.Name = "SoLuong";
+            this.SoLuong.Width = 74;
             // 
             // groupBox1
             // 
@@ -229,6 +272,7 @@
             this.btDel.TabIndex = 2;
             this.btDel.Text = "Xóa";
             this.btDel.UseVisualStyleBackColor = true;
+            this.btDel.Click += new System.EventHandler(this.btDel_Click_1);
             // 
             // btFix
             // 
@@ -239,6 +283,7 @@
             this.btFix.TabIndex = 1;
             this.btFix.Text = "Sửa";
             this.btFix.UseVisualStyleBackColor = true;
+            this.btFix.Click += new System.EventHandler(this.btFix_Click);
             // 
             // btAdd
             // 
@@ -249,42 +294,7 @@
             this.btAdd.TabIndex = 0;
             this.btAdd.Text = "Thêm";
             this.btAdd.UseVisualStyleBackColor = true;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Width = 43;
-            // 
-            // Ten
-            // 
-            this.Ten.HeaderText = "Name";
-            this.Ten.Name = "Ten";
-            this.Ten.Width = 60;
-            // 
-            // PriceS
-            // 
-            this.PriceS.HeaderText = "Price(S)";
-            this.PriceS.Name = "PriceS";
-            this.PriceS.Width = 69;
-            // 
-            // PriceM
-            // 
-            this.PriceM.HeaderText = "Price(M)";
-            this.PriceM.Name = "PriceM";
-            this.PriceM.Width = 71;
-            // 
-            // PriceL
-            // 
-            this.PriceL.HeaderText = "Price(L)";
-            this.PriceL.Name = "PriceL";
-            this.PriceL.Width = 68;
-            // 
-            // SoLuong
-            // 
-            this.SoLuong.HeaderText = "Số lượng";
-            this.SoLuong.Name = "SoLuong";
-            this.SoLuong.Width = 74;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click_1);
             // 
             // frmQLKho
             // 
@@ -293,14 +303,15 @@
             this.ClientSize = new System.Drawing.Size(682, 442);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgvNV);
+            this.Controls.Add(this.dgvKho);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmQLKho";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmQLKho";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).EndInit();
+            this.Text = "Quản Lý Kho";
+            this.Load += new System.EventHandler(this.frmQLKho_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvKho)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -309,7 +320,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgvNV;
+        private System.Windows.Forms.DataGridView dgvKho;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbPriceS;
         private System.Windows.Forms.Label lbName;

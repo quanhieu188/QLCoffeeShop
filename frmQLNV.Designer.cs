@@ -28,7 +28,13 @@
         private void InitializeComponent()
         {
             this.dgvNV = new System.Windows.Forms.DataGridView();
+            this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ho = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CaLamViec = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbChucVu = new System.Windows.Forms.Label();
             this.lbCaLamViec = new System.Windows.Forms.Label();
             this.txtCaLamViec = new System.Windows.Forms.TextBox();
             this.txtChucVu = new System.Windows.Forms.TextBox();
@@ -42,12 +48,6 @@
             this.btDel = new System.Windows.Forms.Button();
             this.btFix = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
-            this.lbChucVu = new System.Windows.Forms.Label();
-            this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ho = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ChucVu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CaLamViec = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,6 +71,42 @@
             this.dgvNV.RowTemplate.Height = 24;
             this.dgvNV.Size = new System.Drawing.Size(660, 304);
             this.dgvNV.TabIndex = 1;
+            this.dgvNV.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNV_CellEnter);
+            // 
+            // MaNV
+            // 
+            this.MaNV.DataPropertyName = "MaNV";
+            this.MaNV.HeaderText = "Mã NV";
+            this.MaNV.Name = "MaNV";
+            this.MaNV.Width = 65;
+            // 
+            // Ho
+            // 
+            this.Ho.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ho.DataPropertyName = "Ho";
+            this.Ho.HeaderText = "Họ";
+            this.Ho.Name = "Ho";
+            // 
+            // Ten
+            // 
+            this.Ten.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ten.DataPropertyName = "Ten";
+            this.Ten.HeaderText = "Tên";
+            this.Ten.Name = "Ten";
+            // 
+            // ChucVu
+            // 
+            this.ChucVu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ChucVu.DataPropertyName = "ChucVu";
+            this.ChucVu.HeaderText = "Chức vụ";
+            this.ChucVu.Name = "ChucVu";
+            // 
+            // CaLamViec
+            // 
+            this.CaLamViec.DataPropertyName = "CaLamViec";
+            this.CaLamViec.HeaderText = "Ca làm việc";
+            this.CaLamViec.Name = "CaLamViec";
+            this.CaLamViec.Width = 87;
             // 
             // groupBox1
             // 
@@ -91,6 +127,16 @@
             this.groupBox1.Size = new System.Drawing.Size(397, 97);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // lbChucVu
+            // 
+            this.lbChucVu.AutoSize = true;
+            this.lbChucVu.Location = new System.Drawing.Point(194, 20);
+            this.lbChucVu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbChucVu.Name = "lbChucVu";
+            this.lbChucVu.Size = new System.Drawing.Size(47, 13);
+            this.lbChucVu.TabIndex = 9;
+            this.lbChucVu.Text = "Chức vụ";
             // 
             // lbCaLamViec
             // 
@@ -218,46 +264,6 @@
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
             // 
-            // lbChucVu
-            // 
-            this.lbChucVu.AutoSize = true;
-            this.lbChucVu.Location = new System.Drawing.Point(194, 20);
-            this.lbChucVu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbChucVu.Name = "lbChucVu";
-            this.lbChucVu.Size = new System.Drawing.Size(47, 13);
-            this.lbChucVu.TabIndex = 9;
-            this.lbChucVu.Text = "Chức vụ";
-            // 
-            // MaNV
-            // 
-            this.MaNV.HeaderText = "Mã NV";
-            this.MaNV.Name = "MaNV";
-            this.MaNV.Width = 65;
-            // 
-            // Ho
-            // 
-            this.Ho.HeaderText = "Họ";
-            this.Ho.Name = "Ho";
-            this.Ho.Width = 46;
-            // 
-            // Ten
-            // 
-            this.Ten.HeaderText = "Tên";
-            this.Ten.Name = "Ten";
-            this.Ten.Width = 51;
-            // 
-            // ChucVu
-            // 
-            this.ChucVu.HeaderText = "Chức vụ";
-            this.ChucVu.Name = "ChucVu";
-            this.ChucVu.Width = 72;
-            // 
-            // CaLamViec
-            // 
-            this.CaLamViec.HeaderText = "Ca làm việc";
-            this.CaLamViec.Name = "CaLamViec";
-            this.CaLamViec.Width = 87;
-            // 
             // frmQLNV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,7 +277,8 @@
             this.MaximizeBox = false;
             this.Name = "frmQLNV";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmQLNV";
+            this.Text = "Quản Lý Nhân Viên";
+            this.Load += new System.EventHandler(this.frmQLNV_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -18,7 +18,6 @@ namespace QLNVApp
         {
             InitializeComponent();
         }
-
         private void btLogin_Click(object sender, EventArgs e)
         {
             string userName = txtUserName.Text.Trim();
@@ -29,7 +28,6 @@ namespace QLNVApp
             }
             else
             {
-                //if (userName == "admin" && passWord == "123456")
                 if (Login(userName, passWord) == true)
                 {
                     this.DialogResult = DialogResult.OK;
@@ -49,7 +47,6 @@ namespace QLNVApp
                 }
             }
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -70,6 +67,23 @@ namespace QLNVApp
                 return true;
             else
                 return false;
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Enter))
+            {
+                btLogin.PerformClick();
+                return true;
+            }
+            else if (keyData == (Keys.Escape))
+            {
+                btCancel.PerformClick();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
         }
     }
 }

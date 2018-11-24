@@ -26,31 +26,44 @@ namespace QLNVApp
             name = cbName.SelectedValue.ToString();
             size = cbSize.SelectedItem.ToString();
             soLuong = numericUpDown1.Value.ToString();
-            if (int.Parse(soLuong) != 0)
+            string sql = "SELECT * FROM Kho WHERE ID = '" + name + "'";
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            //List<TT> list = new List<TT>();
+            while (dr.Read())
             {
-                string sql = "SELECT * FROM Kho WHERE ID = '" + name + "'";
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandText = sql;
-                cmd.CommandType = CommandType.Text;
-                cn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    name = dr[1].ToString();
-                    if (size == "S")
-                        price = dr[2].ToString();
-                    else if (size == "M")
-                        price = dr[3].ToString();
-                    else price = dr[4].ToString();
-                    dgvDrink.Rows.Add(name, price, soLuong);
-                    Tong = Tong + (double.Parse(price) * double.Parse(soLuong));
-                    txtTong.Text = Tong.ToString();
-                }
-                dr.Close();
-                cn.Close(); 
+                name = dr[1].ToString();
+                if (size == "S")
+                    price = dr[2].ToString();
+                else if (size == "M")
+                    price = dr[3].ToString();
+                else price = dr[4].ToString();
+                dgvDrink.Rows.Add(name, price, soLuong);
+                Tong = Tong + (double.Parse(price) * double.Parse(soLuong));
+                txtTong.Text = Tong.ToString();
             }
+
+            //TT tt = new TT(name, price, soLuong);
+            //list.Add(tt);
+            //dgvDrink.DataSource = list;
+
+
+            dr.Close();
+            cn.Close();
         }
+        // tui thu xiu
+        //ê so bằng số đc ko cx dk
+        //LOL cái gì vậy
+        //Hình như tui nhập bừa
+        // Ông thử nhập đi
+        //ông sửa lại là khách từ bảng đơn hàng tham chiếu từ khách hàng từ bảng kho
+        //cái bảng relationship á, ông vẽ mũi tên từ đơn hàng sang doanh thu dk ko
+        //đảo chiều ấy à
+        //uk
         List<Kho> GetKho()
         {
             string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
@@ -123,11 +136,12 @@ namespace QLNVApp
         {
             string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-            string khachHang, date;
+            string khachHang, date, nv;
             khachHang = txtKhachHang.Text;
             date = txtDate.Text;
+            nv = txtNhanVien.Text;
             // them vao bang doanh thu
-            if (string.IsNullOrEmpty(khachHang) || string.IsNullOrEmpty(date))
+            if (string.IsNullOrEmpty(khachHang) || string.IsNullOrEmpty(date) || string.IsNullOrEmpty(nv))
                 return;
             if (CheckDoanhThu(khachHang, date) == 0)
                 MessageBox.Show("Them that bai", "Them thanh toan");
@@ -136,18 +150,11 @@ namespace QLNVApp
                 string sql = "INSERT INTO DoanhThu VALUES('" + khachHang + "', N'" + date + "', N'" + Tong + "')";
                 SqlCommand cmd = new SqlCommand(sql, cn);
                 cn.Open();
-                try
-                {
-                    int numberOfRows = cmd.ExecuteNonQuery();
-                    if (numberOfRows <= 0)
-                        MessageBox.Show("Them that bai", "Them thanh toan");
-                    else
-                        MessageBox.Show("Them thanh cong");
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Nhap sai ngay thang nam");
-                }
+                int numberOfRows = cmd.ExecuteNonQuery();
+                if (numberOfRows <= 0)
+                    MessageBox.Show("Them that bai", "Them thanh toan");
+                else
+                    MessageBox.Show("Them thanh cong");
                 cn.Close();
             }
             // them vao bang

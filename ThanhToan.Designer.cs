@@ -29,21 +29,20 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbName = new System.Windows.Forms.ComboBox();
+            this.btXoa = new System.Windows.Forms.Button();
             this.lbSize = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.btThem = new System.Windows.Forms.Button();
             this.cbSize = new System.Windows.Forms.ComboBox();
-            this.cbName = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvDrink = new System.Windows.Forms.DataGridView();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtNhanVien = new System.Windows.Forms.TextBox();
             this.txtKhachHang = new System.Windows.Forms.TextBox();
             this.txtDate = new System.Windows.Forms.TextBox();
-            this.lbNhanVien = new System.Windows.Forms.Label();
             this.lbKhachHang = new System.Windows.Forms.Label();
             this.lbDate = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -51,7 +50,6 @@
             this.btThanhToan = new System.Windows.Forms.Button();
             this.txtTong = new System.Windows.Forms.TextBox();
             this.lbTong = new System.Windows.Forms.Label();
-            this.btXoa = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -62,17 +60,35 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbName);
             this.groupBox1.Controls.Add(this.btXoa);
             this.groupBox1.Controls.Add(this.lbSize);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.btThem);
             this.groupBox1.Controls.Add(this.cbSize);
-            this.groupBox1.Controls.Add(this.cbName);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(279, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // cbName
+            // 
+            this.cbName.FormattingEnabled = true;
+            this.cbName.Location = new System.Drawing.Point(6, 21);
+            this.cbName.Name = "cbName";
+            this.cbName.Size = new System.Drawing.Size(121, 21);
+            this.cbName.TabIndex = 6;
+            // 
+            // btXoa
+            // 
+            this.btXoa.Location = new System.Drawing.Point(143, 58);
+            this.btXoa.Name = "btXoa";
+            this.btXoa.Size = new System.Drawing.Size(75, 23);
+            this.btXoa.TabIndex = 7;
+            this.btXoa.Text = "Xóa món";
+            this.btXoa.UseVisualStyleBackColor = true;
+            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
             // 
             // lbSize
             // 
@@ -112,17 +128,6 @@
             this.cbSize.Size = new System.Drawing.Size(88, 21);
             this.cbSize.TabIndex = 1;
             // 
-            // cbName
-            // 
-            this.cbName.FormattingEnabled = true;
-            this.cbName.Items.AddRange(new object[] {
-            "Coffee/Decaf",
-            "Café Au Lait"});
-            this.cbName.Location = new System.Drawing.Point(6, 19);
-            this.cbName.Name = "cbName";
-            this.cbName.Size = new System.Drawing.Size(121, 21);
-            this.cbName.TabIndex = 0;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvDrink);
@@ -146,25 +151,27 @@
             // 
             // Ten
             // 
+            this.Ten.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ten.DataPropertyName = "Name";
             this.Ten.HeaderText = "Name";
             this.Ten.Name = "Ten";
             // 
             // Price
             // 
+            this.Price.DataPropertyName = "Price";
             this.Price.HeaderText = "Đơn giá";
             this.Price.Name = "Price";
             // 
             // SoLuong
             // 
+            this.SoLuong.DataPropertyName = "SoLuong";
             this.SoLuong.HeaderText = "Số lượng";
             this.SoLuong.Name = "SoLuong";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.txtNhanVien);
             this.groupBox3.Controls.Add(this.txtKhachHang);
             this.groupBox3.Controls.Add(this.txtDate);
-            this.groupBox3.Controls.Add(this.lbNhanVien);
             this.groupBox3.Controls.Add(this.lbKhachHang);
             this.groupBox3.Controls.Add(this.lbDate);
             this.groupBox3.Location = new System.Drawing.Point(297, 12);
@@ -173,16 +180,9 @@
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             // 
-            // txtNhanVien
-            // 
-            this.txtNhanVien.Location = new System.Drawing.Point(120, 65);
-            this.txtNhanVien.Name = "txtNhanVien";
-            this.txtNhanVien.Size = new System.Drawing.Size(100, 20);
-            this.txtNhanVien.TabIndex = 5;
-            // 
             // txtKhachHang
             // 
-            this.txtKhachHang.Location = new System.Drawing.Point(120, 39);
+            this.txtKhachHang.Location = new System.Drawing.Point(120, 61);
             this.txtKhachHang.Name = "txtKhachHang";
             this.txtKhachHang.Size = new System.Drawing.Size(100, 20);
             this.txtKhachHang.TabIndex = 4;
@@ -194,19 +194,10 @@
             this.txtDate.Size = new System.Drawing.Size(100, 20);
             this.txtDate.TabIndex = 3;
             // 
-            // lbNhanVien
-            // 
-            this.lbNhanVien.AutoSize = true;
-            this.lbNhanVien.Location = new System.Drawing.Point(19, 68);
-            this.lbNhanVien.Name = "lbNhanVien";
-            this.lbNhanVien.Size = new System.Drawing.Size(56, 13);
-            this.lbNhanVien.TabIndex = 2;
-            this.lbNhanVien.Text = "Nhân viên";
-            // 
             // lbKhachHang
             // 
             this.lbKhachHang.AutoSize = true;
-            this.lbKhachHang.Location = new System.Drawing.Point(19, 42);
+            this.lbKhachHang.Location = new System.Drawing.Point(19, 64);
             this.lbKhachHang.Name = "lbKhachHang";
             this.lbKhachHang.Size = new System.Drawing.Size(65, 13);
             this.lbKhachHang.TabIndex = 1;
@@ -219,7 +210,7 @@
             this.lbDate.Name = "lbDate";
             this.lbDate.Size = new System.Drawing.Size(95, 13);
             this.lbDate.TabIndex = 0;
-            this.lbDate.Text = "Ngày/Tháng/Năm";
+            this.lbDate.Text = "Tháng/Ngày/Năm";
             // 
             // groupBox4
             // 
@@ -270,16 +261,6 @@
             this.lbTong.TabIndex = 0;
             this.lbTong.Text = "Tổng:";
             // 
-            // btXoa
-            // 
-            this.btXoa.Location = new System.Drawing.Point(143, 58);
-            this.btXoa.Name = "btXoa";
-            this.btXoa.Size = new System.Drawing.Size(75, 23);
-            this.btXoa.TabIndex = 7;
-            this.btXoa.Text = "Xóa món";
-            this.btXoa.UseVisualStyleBackColor = true;
-            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
-            // 
             // ThanhToan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,25 +292,23 @@
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button btThem;
         private System.Windows.Forms.ComboBox cbSize;
-        private System.Windows.Forms.ComboBox cbName;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvDrink;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtNhanVien;
         private System.Windows.Forms.TextBox txtKhachHang;
         private System.Windows.Forms.TextBox txtDate;
-        private System.Windows.Forms.Label lbNhanVien;
         private System.Windows.Forms.Label lbKhachHang;
         private System.Windows.Forms.Label lbDate;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbSize;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
         private System.Windows.Forms.Button btLamMoi;
         private System.Windows.Forms.Button btThanhToan;
         private System.Windows.Forms.TextBox txtTong;
         private System.Windows.Forms.Label lbTong;
         private System.Windows.Forms.Button btXoa;
+        private System.Windows.Forms.ComboBox cbName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ten;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoLuong;
     }
 }

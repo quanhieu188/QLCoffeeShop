@@ -19,18 +19,15 @@ namespace QLNVApp
         }
         List<Kho> GetKho()
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
             string sql = "SELECT * FROM Kho";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-
             List<Kho> list = new List<Kho>();
             string id, name, prices, pricem, pricel, soluong;
             while (dr.Read())
@@ -41,7 +38,6 @@ namespace QLNVApp
                 pricem = dr[3].ToString();
                 pricel = dr[4].ToString();
                 soluong = dr[5].ToString();
-
                 Kho sup = new Kho(id, name, prices, pricem, pricel, soluong);
                 list.Add(sup);
             }
@@ -49,20 +45,17 @@ namespace QLNVApp
             cn.Close();
             return list;
         }
-        public int CheckNV(string ID)
+        public int CheckKho(string ID)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
             string sql = "SELECT * FROM Kho";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-
             string id;
             while (dr.Read())
             {
@@ -74,25 +67,22 @@ namespace QLNVApp
             cn.Close();
             return 1;
         }
-
-        private void frmNV_Load(object sender, EventArgs e)
+        private void frmQLKho_Load(object sender, EventArgs e)
         {
             List<Kho> list = GetKho();
-            dgvNV.DataSource = list;
-
-            txtID.DataBindings.Add("Text", list, "ID");
-            txtName.DataBindings.Add("Text", list, "Name");
-            txtPriceS.DataBindings.Add("Text", list, "PriceS");
-            txtPriceM.DataBindings.Add("Text", list, "PriceM");
-            txtPriceL.DataBindings.Add("Text", list, "PriceL");
-            txtSoLuong.DataBindings.Add("Text", list, "SoLuong");
+            dgvKho.DataSource = list;
+            //txtID.DataBindings.Add("Text", list, "ID");
+            //txtName.DataBindings.Add("Text", list, "Name");
+            //txtPriceS.DataBindings.Add("Text", list, "PriceS");
+            //txtPriceM.DataBindings.Add("Text", list, "PriceM");
+            //txtPriceL.DataBindings.Add("Text", list, "PriceL");
+            //txtSoLuong.DataBindings.Add("Text", list, "SoLuong");
         }
 
-        private void btAdd_Click(object sender, EventArgs e)
+        private void btAdd_Click_1(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
             string id, name, prices, pricem, pricel, soluong;
             id = txtID.Text;
             name = txtName.Text;
@@ -100,72 +90,78 @@ namespace QLNVApp
             pricem = txtPriceM.Text;
             pricel = txtPriceL.Text;
             soluong = txtSoLuong.Text;
-
             if (string.IsNullOrEmpty(id))
                 return;
-            if (CheckNV(id) == 0)
-                MessageBox.Show("Them that bai", "Them Nha cung cap");
+            if (CheckKho(id) == 0)
+                MessageBox.Show("Them that bai", "Them san pham");
             else
             {
                 string sql = "INSERT INTO Kho VALUES('" + id + "', N'" + name + "', N'" + prices + "', N'" + pricem + "', N'" + pricel + "', N'" + soluong + "')";
                 SqlCommand cmd = new SqlCommand(sql, cn);
-
                 cn.Open();
                 int numberOfRows = cmd.ExecuteNonQuery();
                 if (numberOfRows <= 0)
-                    MessageBox.Show("Them that bai", "Them Nha cung cap");
+                    MessageBox.Show("Them that bai", "Them san pham");
                 else
-                    dgvNV.DataSource = GetKho();
+                    dgvKho.DataSource = GetKho();
                 cn.Close();
             }
-
-
         }
-
-        private void btFix_Click(object sender, EventArgs e)
+        private void btDel_Click_1(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
-            string id, name, prices, pricem, pricel, soluong;
-            id = txtID.Text;
-            name = txtName.Text;
-            prices = txtPriceS.Text;
-            pricem = txtPriceM.Text;
-            pricel = txtPriceL.Text;
-            soluong = txtSoLuong.Text;
-
-            if (string.IsNullOrEmpty(id))
-                return;
-            string sql = "UPDATE Kho set Name = N'" + name + "',Price(S) = N'" + prices + "',Price(M) = N'" + pricem + "',Price(L) = N'" + pricel + "',Số lượng = N'" + soluong + "' WHERE ID = '" + id + "'";
-            SqlCommand cmd = new SqlCommand(sql, cn);
-
-            cn.Open();
-            int numberOfRows = cmd.ExecuteNonQuery();
-            if (numberOfRows <= 0)
-                MessageBox.Show("Sua that bai", "Them Nha cung cap");
-            else
-                dgvNV.DataSource = GetKho();
-            cn.Close();
-        }
-
-        private void btDel_Click(object sender, EventArgs e)
-        {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
-            SqlConnection cn = new SqlConnection(cnStr);
-
             string id;
             id = txtID.Text;
-
             string sql = "DELETE FROM Kho WHERE ID = '" + id + "'";
             SqlCommand cmd = new SqlCommand(sql, cn);
             cn.Open();
             int numberOfRows = cmd.ExecuteNonQuery();
             if (numberOfRows <= 0)
-                MessageBox.Show("Xoa that bai", "Them Nha cung cap");
+                MessageBox.Show("Xoa that bai", "Xoa San Pham");
             else
-                dgvNV.DataSource = GetKho();
+                dgvKho.DataSource = GetKho();
             cn.Close();
+        }
+
+        private void btFix_Click(object sender, EventArgs e)
+        {
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
+            SqlConnection cn = new SqlConnection(cnStr);
+            string id, name, prices, pricem, pricel, soluong;
+            id = txtID.Text;
+            name = txtName.Text;
+            prices = txtPriceS.Text;
+            pricem = txtPriceM.Text;
+            pricel = txtPriceL.Text;
+            soluong = txtSoLuong.Text;
+            if (string.IsNullOrEmpty(id))
+                return;
+            string sql = "UPDATE Kho SET Name = N'" + name + "',PriceS = N'" + prices + "',PriceM = N'" + pricem + "',PriceL = N'" + pricel + "',SoLuong = N'" + soluong + "' WHERE ID = '" + id + "'";
+            SqlCommand cmd = new SqlCommand(sql, cn);
+            cn.Open();
+            int numberOfRows = cmd.ExecuteNonQuery();
+            if (numberOfRows <= 0)
+                MessageBox.Show("Sua that bai", "Sua san pham");
+            else
+                dgvKho.DataSource = GetKho();
+            cn.Close();
+        }
+
+        private void dgvKho_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                txtID.Text = dgvKho.CurrentRow.Cells[0].Value.ToString();
+                txtName.Text = dgvKho.CurrentRow.Cells[1].Value.ToString();
+                txtPriceS.Text = dgvKho.CurrentRow.Cells[2].Value.ToString();
+                txtPriceM.Text = dgvKho.CurrentRow.Cells[3].Value.ToString();
+                txtPriceL.Text = dgvKho.CurrentRow.Cells[4].Value.ToString();
+                txtSoLuong.Text = dgvKho.CurrentRow.Cells[5].Value.ToString();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

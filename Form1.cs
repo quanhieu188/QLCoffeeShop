@@ -56,5 +56,17 @@ namespace QLNVApp
             ThanhToan frm = new ThanhToan();
             frm.ShowDialog();
         }
+
+        private void doanhThuToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            frmQLDoanhThu frm = new frmQLDoanhThu();
+            frm.ShowDialog();
+        }
+
+        private void nguyênLiệuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLKho frm = new frmQLKho();
+            frm.ShowDialog();
+        }
     }
 }

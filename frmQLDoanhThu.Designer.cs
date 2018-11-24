@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvNV = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtKhachHang = new System.Windows.Forms.TextBox();
             this.txtDate = new System.Windows.Forms.TextBox();
@@ -37,32 +36,17 @@
             this.lbDate = new System.Windows.Forms.Label();
             this.lbKhachHang = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btAdd = new System.Windows.Forms.Button();
             this.btDel = new System.Windows.Forms.Button();
             this.btFix = new System.Windows.Forms.Button();
-            this.KhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SoTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).BeginInit();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KhachHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvDoanhThu = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoanhThu)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvNV
-            // 
-            this.dgvNV.AllowUserToOrderColumns = true;
-            this.dgvNV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvNV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvNV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.KhachHang,
-            this.Date,
-            this.SoTien});
-            this.dgvNV.Location = new System.Drawing.Point(11, 127);
-            this.dgvNV.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvNV.Name = "dgvNV";
-            this.dgvNV.RowTemplate.Height = 24;
-            this.dgvNV.Size = new System.Drawing.Size(498, 304);
-            this.dgvNV.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -122,7 +106,7 @@
             this.lbDate.Name = "lbDate";
             this.lbDate.Size = new System.Drawing.Size(95, 13);
             this.lbDate.TabIndex = 1;
-            this.lbDate.Text = "Ngày/Tháng/Năm";
+            this.lbDate.Text = "Tháng/Ngày/Năm";
             // 
             // lbKhachHang
             // 
@@ -136,6 +120,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btAdd);
             this.groupBox2.Controls.Add(this.btDel);
             this.groupBox2.Controls.Add(this.btFix);
             this.groupBox2.Location = new System.Drawing.Point(11, 28);
@@ -146,43 +131,77 @@
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             // 
+            // btAdd
+            // 
+            this.btAdd.Location = new System.Drawing.Point(4, 22);
+            this.btAdd.Margin = new System.Windows.Forms.Padding(2);
+            this.btAdd.Name = "btAdd";
+            this.btAdd.Size = new System.Drawing.Size(56, 19);
+            this.btAdd.TabIndex = 3;
+            this.btAdd.Text = "Thêm";
+            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.btAdd_Click);
+            // 
             // btDel
             // 
-            this.btDel.Location = new System.Drawing.Point(135, 23);
+            this.btDel.Location = new System.Drawing.Point(179, 23);
             this.btDel.Margin = new System.Windows.Forms.Padding(2);
             this.btDel.Name = "btDel";
             this.btDel.Size = new System.Drawing.Size(56, 19);
             this.btDel.TabIndex = 2;
             this.btDel.Text = "Xóa";
             this.btDel.UseVisualStyleBackColor = true;
+            this.btDel.Click += new System.EventHandler(this.btDel_Click_1);
             // 
             // btFix
             // 
-            this.btFix.Location = new System.Drawing.Point(44, 22);
+            this.btFix.Location = new System.Drawing.Point(93, 22);
             this.btFix.Margin = new System.Windows.Forms.Padding(2);
             this.btFix.Name = "btFix";
             this.btFix.Size = new System.Drawing.Size(56, 19);
             this.btFix.TabIndex = 1;
             this.btFix.Text = "Sửa";
             this.btFix.UseVisualStyleBackColor = true;
-            // 
-            // KhachHang
-            // 
-            this.KhachHang.HeaderText = "Khách hàng";
-            this.KhachHang.Name = "KhachHang";
-            this.KhachHang.Width = 90;
-            // 
-            // Date
-            // 
-            this.Date.HeaderText = "Ngày/Tháng/Năm";
-            this.Date.Name = "Date";
-            this.Date.Width = 120;
+            this.btFix.Click += new System.EventHandler(this.btFix_Click_1);
             // 
             // SoTien
             // 
+            this.SoTien.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SoTien.DataPropertyName = "SoTien";
             this.SoTien.HeaderText = "Số tiền";
             this.SoTien.Name = "SoTien";
-            this.SoTien.Width = 65;
+            // 
+            // Date
+            // 
+            this.Date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Date.DataPropertyName = "Date";
+            this.Date.HeaderText = "Ngày/Tháng/Năm";
+            this.Date.Name = "Date";
+            // 
+            // KhachHang
+            // 
+            this.KhachHang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.KhachHang.DataPropertyName = "KhachHang";
+            this.KhachHang.HeaderText = "Khách hàng";
+            this.KhachHang.Name = "KhachHang";
+            // 
+            // dgvDoanhThu
+            // 
+            this.dgvDoanhThu.AllowUserToOrderColumns = true;
+            this.dgvDoanhThu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvDoanhThu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvDoanhThu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDoanhThu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.KhachHang,
+            this.Date,
+            this.SoTien});
+            this.dgvDoanhThu.Location = new System.Drawing.Point(11, 127);
+            this.dgvDoanhThu.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvDoanhThu.Name = "dgvDoanhThu";
+            this.dgvDoanhThu.RowTemplate.Height = 24;
+            this.dgvDoanhThu.Size = new System.Drawing.Size(498, 304);
+            this.dgvDoanhThu.TabIndex = 1;
+            this.dgvDoanhThu.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDoanhThu_CellEnter);
             // 
             // frmQLDoanhThu
             // 
@@ -191,23 +210,23 @@
             this.ClientSize = new System.Drawing.Size(520, 442);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dgvNV);
+            this.Controls.Add(this.dgvDoanhThu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmQLDoanhThu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmQLKho";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvNV)).EndInit();
+            this.Text = "Quản Lý Doanh Thu";
+            this.Load += new System.EventHandler(this.frmQLDoanhThu_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDoanhThu)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dgvNV;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lbSoTien;
         private System.Windows.Forms.Label lbDate;
@@ -218,8 +237,10 @@
         private System.Windows.Forms.TextBox txtKhachHang;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.TextBox txtSoTien;
-        private System.Windows.Forms.DataGridViewTextBoxColumn KhachHang;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.Button btAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn SoTien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn KhachHang;
+        private System.Windows.Forms.DataGridView dgvDoanhThu;
     }
 }

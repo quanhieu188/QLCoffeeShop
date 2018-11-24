@@ -19,18 +19,15 @@ namespace QLNVApp
         }
         List<DoanhThu> GetDoanhThu()
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
-            string sql = "SELECT * FROM Doanh thu";
+            string sql = "SELECT * FROM DoanhThu";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-
             List<DoanhThu> list = new List<DoanhThu>();
             string khachHang, date, soTien;
             while (dr.Read())
@@ -45,57 +42,120 @@ namespace QLNVApp
             cn.Close();
             return list;
         }
-        
-        private void frmNV_Load(object sender, EventArgs e)
+        public int CheckDT(string KhachHang)
         {
-            List<DoanhThu> list = GetDoanhThu();
-            dgvNV.DataSource = list;
-
-            txtKhachHang.DataBindings.Add("Text", list, "KhachHang");
-            txtDate.DataBindings.Add("Text", list, "Date");
-            txtSoTien.DataBindings.Add("Text", list, "SoTien");
-        }
-        private void btFix_Click(object sender, EventArgs e)
-        {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
+            string sql = "SELECT * FROM DoanhThu";
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = sql;
+            cmd.CommandType = CommandType.Text;
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            string khachHang;
+            while (dr.Read())
+            {
+                khachHang = dr[0].ToString();
+                if (KhachHang == khachHang)
+                    return 0;
+            }
+            dr.Close();
+            cn.Close();
+            return 1;
+        }
+        private void btAdd_Click(object sender, EventArgs e)
+        {
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
+            SqlConnection cn = new SqlConnection(cnStr);
             string khachHang, date, soTien;
             khachHang = txtKhachHang.Text;
             date = txtDate.Text;
             soTien = txtSoTien.Text;
-
             if (string.IsNullOrEmpty(khachHang))
                 return;
-            string sql = "UPDATE Doanh thu set Ngày/Tháng/Năm = N'" + date + "',Số tiền = N'" + soTien + "' WHERE Khách hàng = '" + khachHang + "'";
-            SqlCommand cmd = new SqlCommand(sql, cn);
+            if (CheckDT(khachHang) == 0)
+                MessageBox.Show("Them that bai", "Them doanh thu");
+            else
+            {
+                string sql = "INSERT INTO DoanhThu VALUES('" + khachHang + "', N'" + date + "', N'" + soTien + "')";
+                SqlCommand cmd = new SqlCommand(sql, cn);
+                cn.Open();
+                int numberOfRows = cmd.ExecuteNonQuery();
+                if (numberOfRows <= 0)
+                    MessageBox.Show("Them that bai", "Them doanh thu");
+                else
+                    dgvDoanhThu.DataSource = GetDoanhThu();
+                cn.Close();
+            }
+        }
 
+        private void frmQLDoanhThu_Load(object sender, EventArgs e)
+        {
+            List<DoanhThu> list = GetDoanhThu();
+            dgvDoanhThu.DataSource = list;
+            //txtKhachHang.DataBindings.Add("Text", list, "KhachHang");
+            //txtDate.DataBindings.Add("Text", list, "Date");
+            //txtSoTien.DataBindings.Add("Text", list, "SoTien");
+        }
+
+        private void btFix_Click_1(object sender, EventArgs e)
+        {
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
+            SqlConnection cn = new SqlConnection(cnStr);
+            string khachHang, date, soTien;
+            khachHang = txtKhachHang.Text;
+            date = txtDate.Text;
+            soTien = txtSoTien.Text;
+            if (string.IsNullOrEmpty(khachHang))
+                return;
+            string sql = "UPDATE DoanhThu SET NgayThangNam = N'" + date + "',SoTien = N'" + soTien + "' WHERE KhachHang = '" + khachHang + "'";
+            SqlCommand cmd = new SqlCommand(sql, cn);
+            cn.Open();
+            try
+            {
+                int numberOfRows = cmd.ExecuteNonQuery();
+                if (numberOfRows <= 0)
+                    MessageBox.Show("Sua that bai", "Sua doanh thu");
+                else
+                    dgvDoanhThu.DataSource = GetDoanhThu();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Nhap sai ngay thang nam");
+            }
+            cn.Close();
+        }
+        private void btDel_Click_1(object sender, EventArgs e)
+        {
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
+            SqlConnection cn = new SqlConnection(cnStr);
+            string khachHang,ngayThangNam,soTien;
+            khachHang = txtKhachHang.Text;
+            ngayThangNam = txtDate.Text;
+            soTien = txtSoTien.Text;
+            string sql = "DELETE FROM DoanhThu WHERE KhachHang = '" + khachHang + "' AND NgayThangNam = '" + ngayThangNam + "' AND SoTien = '" + soTien + "'";
+            SqlCommand cmd = new SqlCommand(sql, cn);
             cn.Open();
             int numberOfRows = cmd.ExecuteNonQuery();
             if (numberOfRows <= 0)
-                MessageBox.Show("Sua that bai", "Them Nha cung cap");
+                MessageBox.Show("Xoa that bai", "Xoa doanh thu");
             else
-                dgvNV.DataSource = GetDoanhThu();
+                dgvDoanhThu.DataSource = GetDoanhThu();
             cn.Close();
         }
 
-        private void btDel_Click(object sender, EventArgs e)
+        private void dgvDoanhThu_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
-            SqlConnection cn = new SqlConnection(cnStr);
-
-            string khachHang;
-            khachHang = txtKhachHang.Text;
-
-            string sql = "DELETE FROM Doanh thu WHERE Khách hàng = '" + khachHang + "'";
-            SqlCommand cmd = new SqlCommand(sql, cn);
-            cn.Open();
-            int numberOfRows = cmd.ExecuteNonQuery();
-            if (numberOfRows <= 0)
-                MessageBox.Show("Xoa that bai", "Them Nha cung cap");
-            else
-                dgvNV.DataSource = GetDoanhThu();
-            cn.Close();
+            try
+            {
+                txtKhachHang.Text = dgvDoanhThu.CurrentRow.Cells[0].Value.ToString();
+                txtDate.Text = dgvDoanhThu.CurrentRow.Cells[1].Value.ToString();
+                txtSoTien.Text = dgvDoanhThu.CurrentRow.Cells[2].Value.ToString();
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

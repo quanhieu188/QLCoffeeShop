@@ -62,6 +62,7 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(114, 20);
             this.txtUserName.TabIndex = 2;
+            this.txtUserName.Text = "anhduy";
             // 
             // txtPassWord
             // 
@@ -70,6 +71,7 @@
             this.txtPassWord.PasswordChar = '*';
             this.txtPassWord.Size = new System.Drawing.Size(114, 20);
             this.txtPassWord.TabIndex = 3;
+            this.txtPassWord.Text = "123";
             // 
             // btLogin
             // 
@@ -106,6 +108,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

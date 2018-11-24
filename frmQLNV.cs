@@ -20,18 +20,15 @@ namespace QLNVApp
 
         List<NV> GetNV()
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
-            string sql = "SELECT * FROM Nhân Viên";
+            string sql = "SELECT * FROM NhanVien";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-
             List<NV> list = new List<NV>();
             string maNV, ho, ten, chucvu, calamviec;
             while (dr.Read())
@@ -41,7 +38,6 @@ namespace QLNVApp
                 ten = dr[2].ToString();
                 chucvu = dr[3].ToString();
                 calamviec = dr[4].ToString();
-
                 NV sup = new NV(maNV, ho, ten, chucvu, calamviec);
                 list.Add(sup);
             }
@@ -51,18 +47,15 @@ namespace QLNVApp
         }
         public int CheckNV(string MaNV)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
-            string sql = "SELECT * FROM Nhân Viên";
+            string sql = "SELECT * FROM NhanVien";
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = cn;
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-
             cn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-
             string maNV;
             while (dr.Read())
             {
@@ -74,96 +67,101 @@ namespace QLNVApp
             cn.Close();
             return 1;
         }
-
-        private void frmNV_Load(object sender, EventArgs e)
-        {
-            List<NV> list = GetNV();
-            dgvNV.DataSource = list;
-
-            txtMaNV.DataBindings.Add("Text", list, "maNV");
-            txtHo.DataBindings.Add("Text", list, "ho");
-            txtTen.DataBindings.Add("Text", list, "ten");
-            txtChucVu.DataBindings.Add("Text", list, "chucvu");
-            txtCaLamViec.DataBindings.Add("Text", list, "calamviec");
-        }
-
         private void btAdd_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
             string maNV, ho, ten, chucvu, calamviec;
             maNV = txtMaNV.Text;
             ho = txtHo.Text;
             ten = txtTen.Text;
             chucvu = txtChucVu.Text;
             calamviec = txtCaLamViec.Text;
-
             if (string.IsNullOrEmpty(maNV))
                 return;
             if (CheckNV(maNV) == 0)
-                MessageBox.Show("Them that bai", "Them Nha cung cap");
+                MessageBox.Show("Them that bai", "Them nhan vien");
             else
             {
-                string sql = "INSERT INTO Nhân Viên VALUES('" + maNV + "', N'" + ho + "', N'" + ten + "', N'" + chucvu + "', N'" + calamviec + "')";
+                string sql = "INSERT INTO NhanVien VALUES('" + maNV + "', N'" + ho + "', N'" + ten + "', N'" + chucvu + "', N'" + calamviec + "')";
                 SqlCommand cmd = new SqlCommand(sql, cn);
-
                 cn.Open();
                 int numberOfRows = cmd.ExecuteNonQuery();
                 if (numberOfRows <= 0)
-                    MessageBox.Show("Them that bai", "Them Nha cung cap");
+                    MessageBox.Show("Them that bai", "Them nhan vien");
                 else
                     dgvNV.DataSource = GetNV();
                 cn.Close();
             }
-
-
         }
 
         private void btFix_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
             string maNV, ho, ten, chucvu, calamviec;
             maNV = txtMaNV.Text;
             ho = txtHo.Text;
             ten = txtTen.Text;
             chucvu = txtChucVu.Text;
             calamviec = txtCaLamViec.Text;
-
             if (string.IsNullOrEmpty(maNV))
                 return;
-            string sql = "UPDATE Nhân Viên set Họ và tên đệm = N'" + ho + "',Tên = N'" + ten + "',Chức vụ = N'" + chucvu + "',Ca làm việc = N'" + calamviec + "' WHERE MaNV = '" + maNV + "'";
+            string sql = "UPDATE NhanVien SET Ho = N'" + ho + "',Ten = N'" + ten + "',ChucVu = N'" + chucvu + "',CaLamViec = N'" + calamviec + "' WHERE MaNV = '" + maNV + "'";
             SqlCommand cmd = new SqlCommand(sql, cn);
-
             cn.Open();
             int numberOfRows = cmd.ExecuteNonQuery();
             if (numberOfRows <= 0)
-                MessageBox.Show("Sua that bai", "Them Nha cung cap");
+                MessageBox.Show("Sua that bai", "Sua Nhan Vien");
             else
                 dgvNV.DataSource = GetNV();
             cn.Close();
         }
-
         private void btDel_Click(object sender, EventArgs e)
         {
-            string cnStr = "Server = .; Database = QLQuanCafe; Integrated security = true;";
+            string cnStr = "Data Source=DESKTOP-67RKQE5\\SQLEXPRESS;Initial Catalog=QLQuanCafe;Integrated Security=True";
             SqlConnection cn = new SqlConnection(cnStr);
-
-            string maNV;
+            string maNV, ho, ten, chucvu, calamviec;
             maNV = txtMaNV.Text;
-
-            string sql = "DELETE FROM Nhân Viên WHERE MaNV = '" + maNV + "'";
+            ho = txtHo.Text;
+            ten = txtTen.Text;
+            chucvu = txtChucVu.Text;
+            calamviec = txtCaLamViec.Text;
+            string sql = "DELETE FROM NhanVien WHERE MaNV = '" + maNV + "'";
             SqlCommand cmd = new SqlCommand(sql, cn);
             cn.Open();
             int numberOfRows = cmd.ExecuteNonQuery();
             if (numberOfRows <= 0)
-                MessageBox.Show("Xoa that bai", "Them Nha cung cap");
+                MessageBox.Show("Xoa that bai", "Xoa Nhan Vien");
             else
                 dgvNV.DataSource = GetNV();
             cn.Close();
         }
 
+        private void frmQLNV_Load(object sender, EventArgs e)
+        {
+            List<NV> list = GetNV();
+            dgvNV.DataSource = list;
+            //txtMaNV.DataBindings.Add("Text", list, "MaNV");
+            //txtHo.DataBindings.Add("Text", list, "Ho");
+            //txtTen.DataBindings.Add("Text", list, "Ten");
+            //txtChucVu.DataBindings.Add("Text", list, "ChucVu");
+            //txtCaLamViec.DataBindings.Add("Text", list, "CaLamViec");
+        }
+
+        private void dgvNV_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                txtMaNV.Text = dgvNV.CurrentRow.Cells[0].Value.ToString();
+                txtHo.Text = dgvNV.CurrentRow.Cells[1].Value.ToString();
+                txtTen.Text = dgvNV.CurrentRow.Cells[2].Value.ToString();
+                txtChucVu.Text = dgvNV.CurrentRow.Cells[3].Value.ToString();
+                txtCaLamViec.Text = dgvNV.CurrentRow.Cells[4].Value.ToString();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
